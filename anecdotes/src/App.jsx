@@ -5,7 +5,14 @@ const App = () => {
   const actions = useAnecdotesActions()
 
   const vote = (id) => {
-  actions.vote(id)
+    actions.vote(id)
+  }
+
+  const addAnecdote = (e) => {    
+    e.preventDefault()    
+    const content = e.target.anecdote.value
+    actions.add({ content: content })
+    e.target.reset()  
   }
 
   return (
@@ -21,11 +28,11 @@ const App = () => {
         </div>
       ))}
       <h2>create new</h2>
-      <form>
+      <form onSubmit={addAnecdote}>
         <div>
-          <input data-testid="new" />
+          <input name="anecdote" data-testid="new" />
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
       </form>
     </div>
   )
